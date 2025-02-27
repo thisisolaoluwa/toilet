@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Toilet </title>
+    <link rel="stylesheet" href="addToilet.css">
+   
+    
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&display=swap" rel="stylesheet">
+
+
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+   
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+
+          <!-- Add Leaflet and MarkerCluster styles -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+    <!-- Add Leaflet and MarkerCluster scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+
+        
+    <!-- Leaflet Providers Plugin -->
+    <script src="https://unpkg.com/leaflet-providers@latest/leaflet-providers.js"></script>
+
+    <!-- Mapbox -->
+
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.9.2/mapbox-gl.js"></script>
+
+
+    <!-- Material Icons-->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+</head>
+<body>
+    <header>
+        <nav class="nav-bar">
+            <div id="logo">
+                <a href="index.html"><img src="logo.png" alt="logo"></a>
+            </div>
+    
+            <ul class="menu">
+                <li id="addToiletStyle"><a href="#">Add a Toilet</a></li>
+                <li><a href="#">About</a></li>
+                <li id="logoutButton">Logout</li>
+    
+            </ul>
+        </nav>
+    </header>
+
+    <div id="mainDiv">
+        
+        <!-- Left side: placeholder for the map-->
+        <div id="map"></div>
+        
+        <div id="crosshairContainer">
+            <img src="crosshair.png" id="crosshair" alt="Crosshair" />
+        </div>
+        
+        
+
+        <!-- Right side: Form-->
+        <div id="formContainer">
+            <p>Add a Toilet Here:</p>
+                <form id="toiletForm">
+                    
+
+                    <label>1. Align the mark to where the toilet is.</label>
+                    <label>2. Add the toilet name</label>
+                    <input type="text" id="toiletNamePlaceholder" placeholder="Toilet name" class="input-text" required>
+                  
+                    <label>3. Who can use these toilets?</label>
+                    <div class="question-group">
+                      <div class="question">
+                        
+                        <div>
+                            <!-- Men -->
+                            <label>Men</label>
+                            <label><input type="checkbox" id="menYes" data-group="men" value="yes"> Yes</label>
+                            <label><input type="checkbox" id="menNo" data-group="men" value="no"> No </label>
+                            <label><input type="checkbox" id="menUnknown" data-group="men" value="unknown"> Not sure</label>
+                        </div>    
+                        <div>    
+                            <!-- Women -->
+                            <label>Women</label>
+                            <label><input type="checkbox" id="womenYes" data-group="women" value="yes"> Yes</label>
+                            <label><input type="checkbox" id="womenNo" data-group="women" value="no"> No</label>
+                            <label><input type="checkbox" id="womenUnknown" data-group="women" value="unknown"> Not sure</label>
+                        </div>
+                        <div>    
+                            <!-- Disabled -->
+                            <label>Disabled</label>
+                            <label><input type="checkbox" id="disabledYes" data-group="disabled" value="yes"> Yes</label>
+                            <label><input type="checkbox" id="disabledNo" data-group="disabled" value="no"> No</label>
+                            <label><input type="checkbox" id="disabledUnknown" data-group="disabled" value="unknown"> Not sure</label>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <label>4. How clean is this toilet?</label>
+                    <div class="question-group">
+                      
+                      <input type="radio" name="cleanliness" value="dirty"> Dirty
+                      <input type="radio" name="cleanliness" value="clean"> Clean
+                      <input type="radio" name="cleanliness" value="veryClean"> Very Clean
+                    </div>
+                  
+                    <label>5. Is the toilet free?</label>
+                        <div class="question-group">
+                        <input id="freeYes" type="radio" name="isFree" value="yes"> Yes
+                        <input id="notFree" type="radio" name="isFree" value="no"> No
+                        <input id="freeUnknown" type="radio" name="isFree" value="unknown"> Don’t know
+                        </div>
+
+                        <label id="priceLabel" class="hidden1">How much?</label>
+                        <input type="text" id="priceInput" placeholder="e.g. 0.50 EUR" class="input-text hidden1">
+                    
+                    <label>6. Do you know the opening hours?</label>
+                        <div class="question-group">
+                        <input id="knowOpeningHoursYes" type="radio" name="openingHours" value="yes"> Yes
+                        <input id="knowOpeningHoursNo" type="radio" name="openingHours" value="no"> No
+                        </div>
+
+                        <div id="opening-hours-form" class ="hidden2">
+                            <table>
+                              <thead>
+                                <tr>
+                                  <th>Day</th>
+                                  <th>Opening Time</th>
+                                  <th>Closing Time</th>
+                                  <th>Closed</th>
+                                  <th>24 Hours</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <!-- Loop for all days of the week -->
+                                <tr>
+                                  <td>Monday</td>
+                                  <td><select name="monday_open" class="time-select"></select></td>
+                                  <td><select name="monday_close" class="time-select"></select></td>
+                                  <td><input type="checkbox" name="monday_closed" class="closed-checkbox"></td>
+                                  <td><input type="checkbox" name="monday_24hours" class="fullDayCheckbox"></td>
+                                </tr>
+                                <tr>
+                                  <td>Tuesday</td>
+                                  <td><select name="tuesday_open" class="time-select"></select></td>
+                                  <td><select name="tuesday_close" class="time-select"></select></td>
+                                  <td><input type="checkbox" name="tuesday_closed" class="closed-checkbox"></td>
+                                  <td><input type="checkbox" name="tuesday_24hours" class="fullDayCheckbox"></td>
+                                </tr>
+                                <tr>
+                                  <td>Wednesday</td>
+                                  <td><select name="wednesday_open" class="time-select"></select></td>
+                                  <td><select name="wednesday_close" class="time-select"></select></td>
+                                  <td><input type="checkbox" name="wednesday_closed" class="closed-checkbox"></td>
+                                  <td><input type="checkbox" name="wednesday_24hours" class="fullDayCheckbox"></td>
+                                </tr>
+                                <tr>
+                                  <td>Thursday</td>
+                                  <td><select name="thursday_open" class="time-select"></select></td>
+                                  <td><select name="thursday_close" class="time-select"></select></td>
+                                  <td><input type="checkbox" name="thursday_closed" class="closed-checkbox"></td>
+                                  <td><input type="checkbox" name="thursday_24hours" class="fullDayCheckbox"></td>
+                                </tr>
+                                <tr>
+                                  <td>Friday</td>
+                                  <td><select name="friday_open" class="time-select"></select></td>
+                                  <td><select name="friday_close" class="time-select"></select></td>
+                                  <td><input type="checkbox" name="friday_closed" class="closed-checkbox"></td>
+                                  <td><input type="checkbox" name="friday_24hours" class="fullDayCheckbox"></td>
+                                </tr>
+                                <tr>
+                                  <td>Saturday</td>
+                                  <td><select name="saturday_open" class="time-select"></select></td>
+                                  <td><select name="saturday_close" class="time-select"></select></td>
+                                  <td><input type="checkbox" name="saturday_closed" class="closed-checkbox"></td>
+                                  <td><input type="checkbox" name="saturday_24hours" class="fullDayCheckbox"></td>
+                                </tr>
+                                <tr>
+                                  <td>Sunday</td>
+                                  <td><select name="sunday_open" class="time-select"></select></td>
+                                  <td><select name="sunday_close" class="time-select"></select></td>
+                                  <td><input type="checkbox" name="sunday_closed" class="closed-checkbox"></td>
+                                  <td><input type="checkbox" name="sunday_24hours" class="fullDayCheckbox"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                                                    </div>
+                        
+                    <label>7. Notes </label>
+                    <textarea id="toiletNotes" class="input-text" placeholder="Any additional details... (max of 300 character)" rows="4"></textarea>
+
+
+        <button type="submit">Submit</button>
+        
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <footer class="footer">
+        <div class="creatorsName">
+            <p>(c) 2025. <a href="#">Ola Balogun</a></p>
+        </div>
+
+        <ul class="footerMenu">
+            <li><a href="#">Stats</a></li>
+            <li><a href="#">Contributors</a></li>
+
+        </ul>
+    </footer>
+
+
+
+
+
+
+<script type="module" src="addToilet.js"></script>
+
+</body>
+</html>

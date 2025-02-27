@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toilet</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="index.css">
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400..800&display=swap" rel="stylesheet">
+
+
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+     <!-- Leaflet JS -->
+     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+
+     <!-- Add Leaflet and MarkerCluster styles -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+
+    <!-- Add Leaflet and MarkerCluster scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+
+
+     
+     <!-- Leaflet Providers Plugin -->
+     <script src="https://unpkg.com/leaflet-providers@latest/leaflet-providers.js"></script>
+
+
+     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+     <!-- Material Icons-->
+
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+
+    
+
+
+
+
+
+    
+</head>
+    
+<body>
+    <header>
+        <nav class="nav-bar">
+            <div id="logo">
+                <a href="index.html"><img src="logo.png" alt="logo"></a>
+            </div>
+    
+            <ul class="menu">
+                <li id="addToiletStyle"><a href="reg.html">Add a Toilet</a></li>
+                <li><a href="#">About</a></li>
+    
+            </ul>
+        </nav>
+    </header>
+
+    <div id="map">
+
+        <div id="search-box">
+            <h3>Search</h3>
+            <div class="search-input">
+                <img src="search.png">
+                <input type="text" id="search" placeholder="Search location...">
+            </div>
+            
+            <ul class="search-options">
+                <li><img src="direction2.png"><a href="#" class="find-toilet-link">Find a toilet near me</a></li>
+
+            </ul>
+
+
+
+    </div>
+
+
+    <footer class="footer">
+        <div class="creatorsName">
+            <p>(c) 2025. <a href="#">Ola Balogun</a></p>
+        </div>
+
+        <ul class="footerMenu">
+            <li><a href="#">Stats</a></li>
+            <li><a href="#">Contributors</a></li>
+
+        </ul>
+    </footer>
+
+
+    <script type="module" src="index.js"></script>
+    
+</body>
+</html>

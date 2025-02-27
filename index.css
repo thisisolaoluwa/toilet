@@ -1,0 +1,413 @@
+* {
+    box-sizing: border-box;
+}
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    font-family: 'Baloo Bhaijaan 2', sans-serif;
+    color: #522900;
+    overflow-y: auto; /* Allow scrolling */
+
+}
+
+header {
+    /* border-bottom: 1px solid #ddd; */
+    padding: 0 0;
+
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 0px;
+
+}
+
+
+
+.menu {
+    list-style: none;
+    gap: 30px;
+    display: flex;
+    padding-right: 20px;
+    margin-right: 2%;
+    align-items: center;
+}
+
+.menu a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#addToiletStyle {
+    background-color: #F57C00;
+    color: white;
+    border-radius: 40px; /* Round rectangle */
+    padding: 7px 15px;
+    text-align: center;
+    cursor: poin
+}
+
+#addToiletStyle:hover {
+    background-color: #522900;
+}
+
+
+
+#map {
+    height: 87vh; /* Full viewport height */
+    width: 100%;   /* Full width */
+}
+
+
+#logo {
+    padding-left: 20px;
+    padding-top: 10px;
+}
+#logo img{
+    max-width: 250px;
+    height: auto;
+}
+ 
+/* Bottom info panel */
+#infoPanel {
+    max-height: 400px; /* Adjust this value as needed */
+    max-width: 100vw;
+    padding-top: 20px;
+    box-sizing: border-box;
+    overflow-y: auto !important; /* Enables vertical scrolling */
+    overflow-x: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    transition: bottom 0.3s ease-in-out;
+    z-index: 1000;
+    border-radius: 20px 20px 0 0 !important;
+    
+}
+
+.spacer {
+    height: 30px  !important;  /* Adjust height to control whitespace */
+    background-color: white !important; /* Ensures it blends with the panel */
+  }
+
+#infoPanelContent {
+    width: 100%;
+    overflow-y: auto;  /* Only this section scrolls */
+    max-height: 400px;  /* Adjust to leave space for close button */
+    padding-right: 10px; /* Prevent scrollbar from covering content */
+    line-height: 1.5;
+    box-sizing: border-box; /* Prevents width issues */
+    scrollbar-width: thin;  /* For Firefox */
+    scrollbar-color: #ccc transparent; /* Customize color */
+    /* border: 2px solid red; */
+    margin-top: 10px;
+}
+
+
+/* Hide scrollbar for Webkit browsers (Chrome, Edge, Safari) */
+#infoPanelContent::-webkit-scrollbar {
+    width: 50px !important; /* Adjust scrollbar width */
+}
+
+#infoPanelContent::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Custom scrollbar color */
+    border-radius: 10px; /* Keep it smooth */
+}
+
+#infoPanelContent::-webkit-scrollbar-track {
+    background: transparent; /* Hide scrollbar track */
+}
+
+
+
+
+
+
+#toiletName {
+    color: #522900; 
+    font-size: 30px;
+    padding-left: 15px;
+
+}
+
+
+
+/* When 'show' class is added, move the panel up */
+#infoPanel.show {
+    bottom: 0 !important;
+}
+
+
+#closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-radius: 50% !important; /* Make it circular */
+    width: 24px !important; 
+    height: 24px !important; 
+    text-align: center !important;
+    justify-items: center !important;
+    line-height: 22px !important; /* Center 'X' */
+    color: #522900;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 10; /* Ensure the button is above other elements */
+    
+
+}
+
+#closeBtn:hover {
+    background-color: #F57C00 !important; /* Darker shade on hover */
+
+    transform: scale(1.2) !important; /* Slight zoom effect */
+
+}
+ 
+  
+ 
+
+/* Change close button on hover */
+.leaflet-popup-close-button:hover {
+    transform: scale(1.1) !important; /* Slight zoom effect */
+  
+}
+
+.direction-btn {
+    
+        background-color: #F57C00;
+        color: white;
+        border: none;
+        margin-left: 15px;
+        padding: 6px 12px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+
+      }
+      
+      .direction-btn img {
+        width: 15px;
+        height: 15px;
+        object-fit: contain;
+      }
+      
+      .direction-btn:hover {
+        background-color: #522900; /* Darker shade on hover */
+}
+      
+
+
+.infoPanelTopics {
+    margin-bottom: 5px; 
+    font-size:20px;
+    padding-left: 15px;
+
+}
+
+
+i, .material-icons {
+    font-size: 24px; /* Adjust the size of the icon */
+    margin-right: 0px; /* Space between icon and text */
+    color: #F57C00;
+}
+
+
+/* add custom styles for the cluster icon */
+.custom-cluster-icon {
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-sizing: border-box;
+  }
+  
+  .custom-cluster-icon div {
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #F57C00;
+    font-weight: bold;
+    font-size: 17px;
+    text-align: center;
+    line-height: 40px;
+    border: 3px solid #F57C00;
+  }
+
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0 0px;
+    
+}
+
+.footerMenu {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin-right: 5%;
+    padding-right: 4px;
+    align-items: center;
+    
+}
+
+.footerMenu a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.creatorsName {
+    margin-left: 2%;
+    font-weight: bold;
+    font-size: 13px;  
+}
+
+.creatorsName a {
+    color: inherit;
+}
+
+
+
+#search-box {
+    position: absolute;
+    top: 60px;
+    left: 60px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 280px;
+    font-family: Arial, sans-serif;
+    z-index: 1000; 
+}
+
+h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.search-input {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    padding: 7px 12px;
+    margin-top: 12px;
+}
+
+.search-input img {
+    width: 25px;
+    height: 25px;
+}
+
+input#search {
+    border: none;
+    outline: none;
+    background: none;
+    flex: 1;
+    font-size: 16px;
+    padding: 5px;
+}
+
+.search-options {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.search-options li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+   
+
+}
+
+
+.search-options li a {
+    font-weight: bold;
+    color: #522900;
+    margin-left: 10px;
+}
+
+
+.search-options li img {
+    height: 23px;
+    width: 23px;
+}
+
+
+.infoPanelDiv {
+    flex: 1; /* Makes all divs take equal width */
+    min-width: 200px; /* Prevents them from getting too small */
+}
+
+/* Ensure parent container distributes width evenly */
+#infoPanelBigDiv {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Optional: Adds spacing between divs */
+}
+
+@media (max-width: 768px) {
+
+
+    #logo {
+        padding-left: 20px;
+        padding-top: 10px;
+    }
+    #logo img{
+        max-width: 200px;
+        height: auto;
+    }
+    #infoPanelBigDiv {
+        flex-direction: column;
+    }
+
+    .infoPanelDiv {
+        width: 100%;
+    }
+    
+
+
+}
