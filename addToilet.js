@@ -5,7 +5,7 @@ import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/fi
 
 // Firebase configuration (same for both files)
 const firebaseConfig = {
-  apiKey: "AIzaSyAPDnEBd_AaqoququBYISiTlRwUgVwggs0",
+  apiKey: "AIzaSyAa8nLoZLoBfQgWd-vYfljdNycsswMWJGs",
   authDomain: "toilet-01-ca040.firebaseapp.com",
   projectId: "toilet-01-ca040",
   storageBucket: "toilet-01-ca040.firebasestorage.app",
