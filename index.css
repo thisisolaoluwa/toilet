@@ -1,3 +1,8 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -274,6 +279,7 @@ i, .material-icons {
 .footer {
     position: fixed;
     left: 0;
+    right: 0;
     bottom: 0;
     width: 100%;
     display: flex;
@@ -282,8 +288,8 @@ i, .material-icons {
     margin: 0 auto;
     padding: 0 0px;
     background-color: #ffffff;
+    box-sizing: border-box;
     z-index: 1200;
-    
 }
 
 .footerMenu {
@@ -410,8 +416,14 @@ h3 {
     }
 
     .footer {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
         padding: 0 8px;
         min-height: 40px;
+        box-sizing: border-box;
+        z-index: 1300;
     }
 
     .footerMenu {
