@@ -5,9 +5,8 @@ body {
     flex-direction: column;
     font-family: 'Baloo Bhaijaan 2', sans-serif;
     color: #522900;
-    height: 100vh;
-    
-    
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 header {
@@ -80,7 +79,7 @@ header {
     padding: 0 0px;
     height: 40px;
     background-color: white;
-    
+    z-index: 1200;
 }
 
 .footerMenu {
@@ -118,10 +117,7 @@ header {
 
 #mainDiv {
     display: flex;
-    height: 100vh;
-
-    
-
+    min-height: calc(100vh - 100px);
 }
 
 
@@ -129,17 +125,19 @@ header {
 /* Left side: Map container */
 #map {
     width: 50%;
-    height: 100%;
-    /* background-color: #163023;    */
+    height: auto;
+    min-height: calc(100vh - 100px);
 }
 
 /*Right side: form container */
 #formContainer {
     width: 50%;
     padding: 20px;
+    padding-bottom: 80px;
     background-color: #ffffff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
 }
 
 
@@ -156,7 +154,8 @@ form {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    margin-left: 50px;
+    margin-left: 30px;
+    margin-right: 20px;
 }
 
 input[type="text"],
@@ -174,7 +173,7 @@ input[type="radio"] {
 
 
 button {
-    margin: 20px 100px;
+    margin: 20px 0 0;
     padding: 10px 20px;
     background-color: #F57C00;
     color: #ffffff;
@@ -182,9 +181,9 @@ button {
     border-radius: 40px;
     cursor: pointer;
     text-align: center;
-    align-self: flex-end;
-    width: 200px;
-
+    align-self: flex-start;
+    width: 220px;
+    max-width: 100%;
 }
 
 button:hover {
@@ -213,7 +212,7 @@ button:hover {
 
 .question-group {
     margin-top: 7px;
-    margin-left: 100px;
+    margin-left: 30px;
 }
 
 .question {
@@ -253,13 +252,15 @@ input:checked {
     width: 100%;
     max-width: 600px;
     margin: auto;
-  }
+    overflow-x: auto;
+}
   
   table {
     width: 100%;
+    min-width: 620px;
     border-collapse: collapse;
     border: none;
-  }
+}
   
   th, td {
     border: none;
@@ -443,7 +444,7 @@ textarea {
     background-color: #522900 !important; /* Background color */
     border-radius: 50% !important; /* Make it circular */
     width: 24px !important; /* Adjust size */
-    height: 24px !important; 
+    height: 24px !important;
     font-size: 18px !important; /* Adjust 'X' size */
     text-align: center !important;
     line-height: 22px !important; /* Center 'X' */
@@ -558,47 +559,83 @@ i, .material-icons {
 /* Responsive design for mobile screens */
 @media (max-width: 768px) {
     #mainDiv {
-        flex-direction: column; /* Stack the map and form vertically */
+        flex-direction: column;
+        min-height: auto;
         width: 100%;
-
-
-    }
-
-
-    #map,
-    #formContainer {
-        width: 100%; 
-        height: 50%; 
     }
 
     #map {
+        width: 100%;
+        height: 40vh;
+        min-height: 320px;
         margin-top: 10px;
+    }
+
+    #crosshairContainer {
+        left: 50%;
+        top: calc(60px + 20vh);
+        transform: translate(-50%, -50%);
+    }
+
+    #crosshair {
+        width: 58px;
+        height: 58px;
+    }
+
+    #formContainer {
+        width: 100%;
+        max-height: none;
+        overflow: visible;
+        box-shadow: none;
+        padding: 16px 16px 28px;
+    }
+
+    form {
+        margin: 0;
+        gap: 12px;
+    }
+
+    .input-text,
+    textarea {
+        width: 100%;
+    }
+
+    .question-group {
+        margin-left: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 12px;
+    }
+
+    .question {
+        width: 100%;
+    }
+
+    #opening-hours-form {
+        margin: 0;
+    }
+
+    button {
+        width: 100%;
+        align-self: stretch;
     }
 
     #logo {
         padding-left: 20px;
         padding-top: 10px;
-        padding-bottom: px;
     }
-    #logo img{
+
+    #logo img {
         max-width: 160px;
         height: auto;
     }
 
-
     .menu {
         gap: 10px;
+        padding-right: 12px;
     }
 
-
-
-    .menu a {
-        color: inherit;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 13px;
-    }
-    
+    .menu a,
     #logoutButton {
         color: inherit;
         font-weight: bold;
@@ -607,17 +644,26 @@ i, .material-icons {
     }
 
     #addToiletStyle {
-        background-color: #F57C00;
-        color: white;
-        border-radius: 40px; 
         padding: 2px 10px;
-        text-align: center;
-        cursor: pointer;
     }
 
+    .footer {
+        position: static;
+        width: 100%;
+        min-height: 40px;
+        padding: 8px 10px 12px;
+    }
 
+    .footerMenu {
+        gap: 14px;
+        margin-right: 0;
+    }
 
-    
+    .footerMenu a,
+    .creatorsName {
+        font-size: 12px;
+    }
+
     #infoPanelBigDiv {
         flex-direction: column;
     }
@@ -625,6 +671,4 @@ i, .material-icons {
     .infoPanelDiv {
         width: 100%;
     }
-
-        
-    }
+}

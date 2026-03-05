@@ -49,12 +49,15 @@ header {
 }
 
 #addToiletStyle {
-    background-color: #000000;
+    background-color: #F57C00;
     color: white;
-    border-radius: 40px; /* Round rectangle */
-    padding: 7px 15px;
+    border-radius: 40px;
+    padding: 4px 12px;
     text-align: center;
-    cursor: poin
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 #addToiletStyle:hover {
@@ -274,6 +277,8 @@ i, .material-icons {
     align-items: center;
     margin: 0 auto;
     padding: 0 0px;
+    background-color: #ffffff;
+    z-index: 1200;
     
 }
 
@@ -377,6 +382,43 @@ h3 {
         max-width: 200px;
         height: auto;
     }
+
+    .menu {
+        gap: 10px;
+    }
+
+    .menu a {
+        font-size: 13px;
+    }
+
+    #addToiletStyle {
+        background-color: #F57C00;
+        border-radius: 40px;
+        padding: 3px 10px;
+    }
+
+    #action-box {
+        left: 16px;
+        right: 16px;
+        width: auto;
+        padding: 14px;
+    }
+
+    .footer {
+        padding: 0 8px;
+        min-height: 40px;
+    }
+
+    .footerMenu {
+        margin-right: 2%;
+        gap: 16px;
+    }
+
+    .footerMenu a,
+    .creatorsName {
+        font-size: 12px;
+    }
+
     #infoPanelBigDiv {
         flex-direction: column;
     }
