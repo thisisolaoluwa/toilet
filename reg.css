@@ -53,16 +53,21 @@ header {
 #addToiletStyle {
     background-color: #F57C00;
     color: white;
-    border-radius: 40px; /* Round rectangle */
-    padding: 7px 15px;
+    border-radius: 40px;
+    padding: 8px 18px;
     text-align: center;
+    white-space: nowrap;
     cursor: pointer;
 }
+
 
 #addToiletStyle:hover {
     background-color: #522900;
 }
 
+#addToiletStyle a {
+    white-space: nowrap;
+}
 
 .footer {
     position: fixed;
@@ -113,23 +118,20 @@ header {
     align-items: center;
     flex: 1;
     min-height: calc(100vh - 100px);
-    padding: 12px 0 56px;
+    padding: 20px 0 64px;
 }
 
 .leftDiv {
-    /* border: 4px solid blue; */
-    width: 40%; /* 50% of the parent's width */
-    height: 50vh; /* 20% of the viewport height */
+    width: 40%;
+    height: 50vh;
     border-right: 2px solid #e0e0e0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding-top: 14px;
     padding-left: 5%;
     padding-right: 5%;
-    
-    
-
 }
 
 /*
@@ -158,18 +160,19 @@ header {
 
 
 .signUpAndInBox {
-    
     border-radius: 30px;
     border: 1.5px solid #e0e0e0;
-    height: 80%;
-    width: 60%;
+    width: 52%;
+    max-width: 360px;
+    min-height: 340px;
+    height: auto;
+    padding: 16px 14px 20px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     font-size: 20px;
     color: #163023;
-    
-   
+    box-sizing: border-box;
 }
 
 #divForSignUpAndSignInBtn {
@@ -204,10 +207,10 @@ header {
 }
 
 #SignUpFormDiv {
-    /* border: 1.5px solid red; */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
 }
 
 /* #signInForm {
@@ -215,16 +218,14 @@ header {
 } */
 
 button {
-    margin: 20px 65px;
+    margin: 16px 0 0;
     padding: 10px 20px;
     border: none;
     background-color: #F57C00;
     color: white;
     border-radius: 40px;
-    width: 70%;
+    width: 100%;
     text-align: center;
-    
-    
 }
 
 button:hover {
@@ -233,21 +234,21 @@ button:hover {
 
 
 .form {
-    
-    margin-top: 30px;
+    margin-top: 22px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    
-    
+    align-items: stretch;
+    width: 100%;
 }
 
 .form input {
     display: block;
-    margin: 10px auto;
+    margin: 10px 0;
     padding: 10px;
-    width: 70%;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
     border: 1.5px solid #e0e0e0;
     border-radius: 10px;
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
@@ -289,11 +290,12 @@ button:hover {
     }
 
     .menu a {
-        font-size: 13px;
+        font-size: 14px;
     }
 
     #addToiletStyle {
-        padding: 3px 10px;
+        padding: 6px 14px;
+        white-space: nowrap;
     }
 
     .container {
@@ -303,7 +305,7 @@ button:hover {
         gap: 12px;
         min-height: auto;
         height: auto;
-        padding: 8px 16px 20px;
+        padding: 8px 16px 68px;
     }
 
     .leftDiv,
@@ -320,6 +322,7 @@ button:hover {
         border-right: none;
         border-bottom: 2px solid #e0e0e0;
         align-items: flex-start;
+        padding-top: 10px;
         padding-bottom: 16px;
     }
 
@@ -341,8 +344,8 @@ button:hover {
     .signUpAndInBox {
         width: 100%;
         height: auto;
-        min-height: 380px;
-        padding: 16px 12px 20px;
+        min-height: 320px;
+        padding: 14px 12px 16px;
         font-size: 18px;
     }
 
@@ -352,24 +355,44 @@ button:hover {
     }
 
     .form {
-        margin-top: 18px;
-    }
+    margin-top: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+}
 
     .form input {
-        width: 100%;
-        max-width: none;
-    }
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 10px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
 
     button {
-        margin: 16px 0 0;
-        width: 100%;
-    }
+    margin: 16px 0 0;
+    padding: 10px 20px;
+    border: none;
+    background-color: #F57C00;
+    color: white;
+    border-radius: 40px;
+    width: 100%;
+    text-align: center;
+}
 
     .footer {
-        position: static;
+        position: fixed;
+        left: 0;
+        bottom: 0;
         width: 100%;
-        height: auto;
-        padding: 8px 10px 12px;
+        height: 40px;
+        padding: 0 10px;
     }
 
     .footerMenu {
