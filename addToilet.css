@@ -1,3 +1,11 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
 body {
     margin: 0;
     padding: 0;
@@ -21,8 +29,9 @@ header {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    padding: 0 0px;
-
+    width: 100%;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
 
 .logo {
@@ -34,8 +43,9 @@ header {
     list-style: none;
     gap: 30px;
     display: flex;
-    padding-right: 20px;
-    margin-right: 2%;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
     align-items: center;
 }
 
@@ -56,9 +66,10 @@ header {
 #addToiletStyle {
     background-color: #F57C00;
     color: white;
-    border-radius: 40px; 
-    padding: 3px 11px;
+    border-radius: 40px;
+    padding: 8px 18px;
     text-align: center;
+    white-space: nowrap;
     cursor: pointer;
 }
 
@@ -66,19 +77,25 @@ header {
     background-color: #522900;
 }
 
+#addToiletStyle a {
+    white-space: nowrap;
+}
+
 
 .footer {
     position: fixed;
     left: 0;
+    right: 0;
     bottom: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    padding: 0 0px;
+    padding: 0 12px;
     height: 40px;
-    background-color: white;
+    background-color: #ffffff;
+    box-sizing: border-box;
     z-index: 1200;
 }
 
@@ -86,10 +103,9 @@ header {
     list-style: none;
     display: flex;
     gap: 30px;
-    margin-right: 5%;
-    padding-right: 4px;
+    margin-right: 0;
+    padding-right: 0;
     align-items: center;
-    
 }
 
 
@@ -102,9 +118,9 @@ header {
 }
 
 .creatorsName {
-    margin-left: 2%;
+    margin-left: 0;
     font-weight: bold;
-    font-size: 13px;  
+    font-size: 13px;
 }
 
 .creatorsName a {
@@ -311,8 +327,9 @@ textarea {
 
 
   #logo {
-    padding-left: 20px;
+    padding-left: 0;
     padding-top: 10px;
+    flex-shrink: 0;
 }
 #logo img{
     max-width: 250px;
@@ -621,8 +638,9 @@ i, .material-icons {
     }
 
     #logo {
-        padding-left: 20px;
+        padding-left: 0;
         padding-top: 10px;
+        flex-shrink: 0;
     }
 
     #logo img {
@@ -631,8 +649,11 @@ i, .material-icons {
     }
 
     .menu {
-        gap: 10px;
-        padding-right: 12px;
+        gap: 8px;
+        padding-left: 0;
+        padding-right: 0;
+        margin: 0;
+        align-items: center;
     }
 
     .menu a,
@@ -644,23 +665,31 @@ i, .material-icons {
     }
 
     #addToiletStyle {
-        padding: 2px 10px;
+        padding: 5px 10px;
+        white-space: nowrap;
     }
 
     .footer {
-        position: static;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
         width: 100%;
-        min-height: 40px;
-        padding: 8px 10px 12px;
+        height: 40px;
+        padding: 0 12px;
+        box-sizing: border-box;
+        z-index: 1300;
     }
 
     .footerMenu {
         gap: 14px;
         margin-right: 0;
+        padding-right: 0;
     }
 
     .footerMenu a,
     .creatorsName {
+        margin-left: 0;
         font-size: 12px;
     }
 
