@@ -331,7 +331,7 @@ textarea {
     padding-top: 10px;
 }
 #logo img{
-    max-width: 250px;
+    max-width: 220px;
     height: auto;
 }
 
@@ -642,7 +642,7 @@ i, .material-icons {
 }
 
     #logo img {
-        max-width: 200px;
+        max-width: 150px;
         height: auto;
     }
 
