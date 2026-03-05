@@ -608,14 +608,18 @@ document.addEventListener("DOMContentLoaded", function () {
      
 
       // Collect form data
-      const toiletName = document.getElementById("toiletName").value;
+      const toiletNameInput = document.getElementById("toiletNamePlaceholder");
+      const toiletName = toiletNameInput ? toiletNameInput.value.trim() : "";
+      if (!toiletName) {
+        alert("Please add the toilet name.");
+        return;
+      }
       const men = document.querySelector('input[data-group="men"]:checked')?.value || null;
       const women = document.querySelector('input[data-group="women"]:checked')?.value || null;
       const disabled = document.querySelector('input[data-group="disabled"]:checked')?.value || null;
       const cleanliness = document.querySelector('input[name="cleanliness"]:checked')?.value || null;
       const isFree = document.querySelector('input[name="isFree"]:checked')?.value || null;
-      const price = document.getElementById("priceInput").value;
-
+      const price = document.getElementById("priceInput").value.trim();
       const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
       const openingHours = {};
       days.forEach(day => {
@@ -626,25 +630,8 @@ document.addEventListener("DOMContentLoaded", function () {
           fullDay: document.querySelector(`input[name="${day}_24hours"]`).checked
         };
       });
-
-      const notes = document.getElementById("toiletNotes");
-
-      if (notes) {
-        let alertShown = false; // Flag to track if the alert has been shown
-
-        notes.addEventListener("input", function () {
-          if (this.value.length > 300) {
-            this.value = this.value.substring(0, 300); // Trim to 100 characters
-            if (!alertShown) {
-              alert("You can only enter up to 300 characters.");
-              alertShown = true; // Set flag to prevent multiple alerts
-              setTimeout(() => {
-                alertShown = false; // Reset flag after user continues typing
-              }, 1000); // Allow alert again after 1 second (adjustable)
-            }
-          }
-        });
-}
+      const notesInput = document.getElementById("toiletNotes");
+      const notes = notesInput ? notesInput.value.trim().slice(0, 300) : "";
 
       
 
