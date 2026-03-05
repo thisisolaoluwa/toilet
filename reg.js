@@ -4,7 +4,7 @@ import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.1.0
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAa8nLoZLoBfQgWd-vYfljdNycsswMWJGs",
+  apiKey: "AIzaSyAPDnEBd_AaqoququBYISiTlRwUgVwggs0",
   authDomain: "toilet-01-ca040.firebaseapp.com",
   projectId: "toilet-01-ca040",
   storageBucket: "toilet-01-ca040.firebasestorage.app",
