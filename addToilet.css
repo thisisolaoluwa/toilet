@@ -329,7 +329,6 @@ textarea {
   #logo {
     padding-left: 0;
     padding-top: 10px;
-    flex-shrink: 0;
 }
 #logo img{
     max-width: 250px;
@@ -638,13 +637,12 @@ i, .material-icons {
     }
 
     #logo {
-        padding-left: 0;
-        padding-top: 10px;
-        flex-shrink: 0;
-    }
+    padding-left: 0;
+    padding-top: 10px;
+}
 
     #logo img {
-        max-width: 160px;
+        max-width: 200px;
         height: auto;
     }
 
