@@ -26,12 +26,12 @@ header {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    padding: 0 0px;
-
+    width: 100%;
+    padding: 0 16px;
 }
 
 #logo {
-    padding-left: 20px;
+    padding-left: 0;
     padding-top: 10px;
 }
 #logo img{
@@ -43,8 +43,8 @@ header {
     list-style: none;
     gap: 30px;
     display: flex;
-    padding-right: 20px;
-    margin-right: 2%;
+    padding-right: 0;
+    margin-right: 0;
     align-items: center;
 }
 
@@ -84,7 +84,7 @@ header {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    padding: 0 0px;
+    padding: 0 12px;
     height: 40px;
     background-color: #ffffff;
     box-sizing: border-box;
@@ -95,10 +95,9 @@ header {
     list-style: none;
     display: flex;
     gap: 30px;
-    margin-right: 5%;
-    padding-right: 4px;
+    margin-right: 0;
+    padding-right: 0;
     align-items: center;
-    
 }
 
 .footerMenu a {
@@ -109,9 +108,9 @@ header {
 }
 
 .creatorsName {
-    margin-left: 2%;
+    margin-left: 0;
     font-weight: bold;
-    font-size: 13px;  
+    font-size: 13px;
 }
 
 .creatorsName a {
@@ -283,7 +282,7 @@ button:hover {
 /* Responsive design for mobile screens */
 @media (max-width: 768px) {
     #logo {
-        padding-left: 20px;
+        padding-left: 0;
         padding-top: 10px;
     }
 
@@ -294,6 +293,8 @@ button:hover {
 
     .menu {
         gap: 10px;
+        padding-right: 0;
+        margin-right: 0;
     }
 
     .menu a {
@@ -362,36 +363,36 @@ button:hover {
     }
 
     .form {
-    margin-top: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: stretch;
-    width: 100%;
-}
+        margin-top: 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        width: 100%;
+    }
 
     .form input {
-    display: block;
-    margin: 10px 0;
-    padding: 10px;
-    width: 100%;
-    max-width: none;
-    box-sizing: border-box;
-    border: 1.5px solid #e0e0e0;
-    border-radius: 10px;
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-}
+        display: block;
+        margin: 10px 0;
+        padding: 10px;
+        width: 100%;
+        max-width: none;
+        box-sizing: border-box;
+        border: 1.5px solid #e0e0e0;
+        border-radius: 10px;
+        transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
 
     button {
-    margin: 16px 0 0;
-    padding: 10px 20px;
-    border: none;
-    background-color: #F57C00;
-    color: white;
-    border-radius: 40px;
-    width: 100%;
-    text-align: center;
-}
+        margin: 16px 0 0;
+        padding: 10px 20px;
+        border: none;
+        background-color: #F57C00;
+        color: white;
+        border-radius: 40px;
+        width: 100%;
+        text-align: center;
+    }
 
     .footer {
         position: fixed;
@@ -400,7 +401,7 @@ button:hover {
         bottom: 0;
         width: 100%;
         height: 40px;
-        padding: 0 10px;
+        padding: 0 12px;
         box-sizing: border-box;
         z-index: 1300;
     }
@@ -408,10 +409,12 @@ button:hover {
     .footerMenu {
         gap: 14px;
         margin-right: 0;
+        padding-right: 0;
     }
 
     .footerMenu a,
     .creatorsName {
+        margin-left: 0;
         font-size: 12px;
     }
 }

@@ -31,8 +31,8 @@ header {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    padding: 0 0px;
-
+    width: 100%;
+    padding: 0 16px;
 }
 
 
@@ -41,8 +41,8 @@ header {
     list-style: none;
     gap: 30px;
     display: flex;
-    padding-right: 20px;
-    margin-right: 2%;
+    padding-right: 0;
+    margin-right: 0;
     align-items: center;
 }
 
@@ -82,7 +82,7 @@ header {
 
 
 #logo {
-    padding-left: 20px;
+    padding-left: 0;
     padding-top: 10px;
 }
 #logo img{
@@ -286,7 +286,7 @@ i, .material-icons {
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    padding: 0 0px;
+    padding: 0 12px;
     background-color: #ffffff;
     box-sizing: border-box;
     z-index: 1200;
@@ -296,10 +296,9 @@ i, .material-icons {
     list-style: none;
     display: flex;
     gap: 30px;
-    margin-right: 5%;
-    padding-right: 4px;
+    margin-right: 0;
+    padding-right: 0;
     align-items: center;
-    
 }
 
 .footerMenu a {
@@ -310,9 +309,9 @@ i, .material-icons {
 }
 
 .creatorsName {
-    margin-left: 2%;
+    margin-left: 0;
     font-weight: bold;
-    font-size: 13px;  
+    font-size: 13px;
 }
 
 .creatorsName a {
@@ -323,8 +322,9 @@ i, .material-icons {
 
 #action-box {
     position: absolute;
-    top: 60px;
+    top: 50%;
     left: 60px;
+    transform: translateY(-50%);
     background: white;
     border-radius: 12px;
     padding: 12px 14px;
@@ -381,19 +381,20 @@ h3 {
 }
 
 @media (max-width: 768px) {
-
-
     #logo {
-        padding-left: 20px;
+        padding-left: 0;
         padding-top: 10px;
     }
-    #logo img{
+
+    #logo img {
         max-width: 200px;
         height: auto;
     }
 
     .menu {
         gap: 10px;
+        padding-right: 0;
+        margin-right: 0;
     }
 
     .menu a {
@@ -409,7 +410,8 @@ h3 {
 
     #action-box {
         left: 12px;
-        right: auto;
+        top: 50%;
+        transform: translateY(-50%);
         width: auto;
         max-width: 220px;
         padding: 10px 12px;
@@ -420,19 +422,21 @@ h3 {
         left: 0;
         right: 0;
         bottom: 0;
-        padding: 0 8px;
+        padding: 0 12px;
         min-height: 40px;
         box-sizing: border-box;
         z-index: 1300;
     }
 
     .footerMenu {
-        margin-right: 2%;
+        margin-right: 0;
+        padding-right: 0;
         gap: 16px;
     }
 
     .footerMenu a,
     .creatorsName {
+        margin-left: 0;
         font-size: 12px;
     }
 
@@ -443,7 +447,4 @@ h3 {
     .infoPanelDiv {
         width: 100%;
     }
-    
-
-
 }
