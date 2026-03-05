@@ -322,9 +322,9 @@ i, .material-icons {
 
 #action-box {
     position: absolute;
-    top: 50%;
-    left: 60px;
-    transform: translateY(-50%);
+    top: 78px;
+    left: 50%;
+    transform: translateX(-50%);
     background: white;
     border-radius: 12px;
     padding: 12px 14px;
@@ -409,9 +409,9 @@ h3 {
     }
 
     #action-box {
-        left: 12px;
-        top: 50%;
-        transform: translateY(-50%);
+        left: 50%;
+        top: 74px;
+        transform: translateX(-50%);
         width: auto;
         max-width: 220px;
         padding: 10px 12px;
