@@ -71,27 +71,49 @@ function getDistance(userLat, userLong, crossLat, crossLong) {
 
 
 
-  // Get the user's current location for distance calculation
-    function getPosition(position) {
-    userLat = position.coords.latitude;
-    userLong = position.coords.longitude;
-    map.setView([userLat, userLong], 18);
+  // Keep crosshair coordinates synced with current map center.
+function updateCrosshairFromMapCenter() {
+  const center = map.getCenter();
+  crossLat = center.lat;
+  crossLong = center.lng;
 
-    // After getting the location, you can safely call getDistance
-    map.on('moveend', function() {
-      let center = map.getCenter();
-      crossLat = center.lat;
-      crossLong = center.lng;
-      
-      if (crossLat !== undefined && crossLong !== undefined) {
-          getDistance(userLat, userLong, crossLat, crossLong);
-      } else {
-          alert("Please move the map to select a location.");
-      }
-  });
-  
+  if (userLat !== undefined && userLong !== undefined) {
+    getDistance(userLat, userLong, crossLat, crossLong);
+  }
+}
+
+// Get and apply the user's current location for distance calculation.
+function getPosition(position) {
+  userLat = position.coords.latitude;
+  userLong = position.coords.longitude;
+
+  // Center map and ensure submission coordinates point to the user's location.
+  map.setView([userLat, userLong], 18);
+  crossLat = userLat;
+  crossLong = userLong;
+}
+
+function zoomToCurrentLocation(showAlertOnError = false) {
+  if (!navigator.geolocation) {
+    if (showAlertOnError) {
+      alert("Geolocation is not supported by your browser.");
+    } else {
+      console.log("Your browser doesn't support geolocation.");
+    }
+    return;
   }
 
+  navigator.geolocation.getCurrentPosition(
+    getPosition,
+    (err) => {
+      console.error("Geolocation error:", err);
+      if (showAlertOnError) {
+        alert("Unable to retrieve your location.");
+      }
+    },
+    { enableHighAccuracy: true }
+  );
+}
 
 // --- FORM & CHECKBOX HANDLING --- //
 
@@ -450,16 +472,21 @@ document.addEventListener("DOMContentLoaded", function () {
     userInteracted = true;
   });
 
- 
-  // Start geolocation updates
-  if (!navigator.geolocation) {
-    console.log("Your browser doesn't support geolocation.");
-  } else {
-    navigator.geolocation.getCurrentPosition(getPosition, (err) =>
-      console.error("Geolocation error:", err),
-      { enableHighAccuracy: true }
-    );
-    
+  map.on("moveend", () => {
+    updateCrosshairFromMapCenter();
+  });
+
+  // Set initial crosshair coordinates to the map center.
+  updateCrosshairFromMapCenter();
+
+  // Start geolocation updates on initial page load.
+  zoomToCurrentLocation(false);
+
+  const zoomToMyLocationBtn = document.getElementById("zoomToMyLocationBtn");
+  if (zoomToMyLocationBtn) {
+    zoomToMyLocationBtn.addEventListener("click", () => {
+      zoomToCurrentLocation(true);
+    });
   }
 
     // Toggle opening hours section visibility based on radio button selection
