@@ -5,8 +5,8 @@ body {
     flex-direction: column;
     font-family: 'Baloo Bhaijaan 2', sans-serif;
     color: #522900;
-    height: 100vh;
-    
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 header {
@@ -75,7 +75,8 @@ header {
     margin: 0 auto;
     padding: 0 0px;
     height: 40px;
-    
+    background-color: #ffffff;
+    z-index: 1200;
 }
 
 .footerMenu {
@@ -107,12 +108,12 @@ header {
 
 
 .container {
-    /* border: 4px solid red;  */
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    height: 100%;
+    flex: 1;
+    min-height: calc(100vh - 100px);
+    padding: 12px 0 56px;
 }
 
 .leftDiv {
@@ -273,35 +274,111 @@ button:hover {
 
 /* Responsive design for mobile screens */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column; /* Stack the map and form vertically */
-    }
-
-    
-    .leftDiv, .rightDiv {
-        
-        width: 100%; /* Each section takes full width */
-        box-sizing: border-box; /* Include padding in width calculation */
-        height: 50%; /* Each section takes half the viewport height */
-    }
-
-   
-
-}
-
-
-
-@media (max-width: 768px) {
-
-
     #logo {
         padding-left: 20px;
         padding-top: 10px;
     }
-    #logo img{
+
+    #logo img {
         max-width: 200px;
         height: auto;
     }
 
+    .menu {
+        gap: 10px;
+    }
 
+    .menu a {
+        font-size: 13px;
+    }
+
+    #addToiletStyle {
+        padding: 3px 10px;
+    }
+
+    .container {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        gap: 12px;
+        min-height: auto;
+        height: auto;
+        padding: 8px 16px 20px;
+    }
+
+    .leftDiv,
+    .rightDiv {
+        width: 100%;
+        height: auto;
+        min-height: unset;
+        box-sizing: border-box;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .leftDiv {
+        border-right: none;
+        border-bottom: 2px solid #e0e0e0;
+        align-items: flex-start;
+        padding-bottom: 16px;
+    }
+
+    .leftDiv h1 {
+        margin: 8px 0;
+        font-size: 32px;
+    }
+
+    .leftDiv p {
+        margin: 0;
+        font-size: 16px;
+    }
+
+    .rightDiv {
+        justify-content: flex-start;
+        padding-bottom: 8px;
+    }
+
+    .signUpAndInBox {
+        width: 100%;
+        height: auto;
+        min-height: 380px;
+        padding: 16px 12px 20px;
+        font-size: 18px;
+    }
+
+    #divForSignUpAndSignInBtn {
+        gap: 24px;
+        padding-top: 6px;
+    }
+
+    .form {
+        margin-top: 18px;
+    }
+
+    .form input {
+        width: 100%;
+        max-width: none;
+    }
+
+    button {
+        margin: 16px 0 0;
+        width: 100%;
+    }
+
+    .footer {
+        position: static;
+        width: 100%;
+        height: auto;
+        padding: 8px 10px 12px;
+    }
+
+    .footerMenu {
+        gap: 14px;
+        margin-right: 0;
+    }
+
+    .footerMenu a,
+    .creatorsName {
+        font-size: 12px;
+    }
 }
