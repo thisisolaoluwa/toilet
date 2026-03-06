@@ -20,7 +20,6 @@ const CORE_ASSETS = [
   "addToilet.js",
   "contributors.js",
   "stats.js",
-  "about.js",
   "pwa-register.js",
   "manifest.webmanifest",
   "pwa-icon-192.png",
