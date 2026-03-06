@@ -1,6 +1,10 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup
+} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -10,96 +14,145 @@ const firebaseConfig = {
   storageBucket: "toilet-01-ca040.firebasestorage.app",
   messagingSenderId: "424764303569",
   appId: "1:424764303569:web:04c9d9011eede80a1c3df0",
-  databaseURL: "https://toilet-01-ca040-default-rtdb.europe-west1.firebasedatabase.app/" // Explicitly included
+  databaseURL: "https://toilet-01-ca040-default-rtdb.europe-west1.firebasedatabase.app/"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app); // Correctly initializes the database using the databaseURL
 const auth = getAuth(app);
+const database = getDatabase(app);
+const provider = new GoogleAuthProvider();
 
-// Get references to buttons and forms
-const signUpBtn = document.getElementById('signUpBtn');
-const signInBtn = document.getElementById('signInBtn');
-const signUpForm = document.getElementById('signUpForm');
-const signInForm = document.getElementById('signInForm');
-const signUpBtnDiv = document.getElementById('signUpBtnDiv');
-const signInBtnDiv = document.getElementById('signInBtnDiv');
+const googleAuthBtn = document.getElementById("googleAuthBtn");
+const usernameSetup = document.getElementById("usernameSetup");
+const usernameInput = document.getElementById("username");
+const completeSignupBtn = document.getElementById("completeSignupBtn");
+const authStatus = document.getElementById("authStatus");
 
-// Show Sign-Up Form and Hide Sign-In Form
-signUpBtn.addEventListener('click', () => {
-  signUpForm.style.display = 'block';
-  signInForm.style.display = 'none';
-  signUpBtnDiv.style.borderBottom = '1.5px solid #e0e0e0';
-  signInBtnDiv.style.borderBottom = 'none';
-});
+let pendingUser = null;
 
-// Show Sign-In Form and Hide Sign-Up Form
-signInBtn.addEventListener('click', () => {
-  signUpForm.style.display = 'none';
-  signInForm.style.display = 'block';
-  signInBtnDiv.style.borderBottom = '1.5px solid #e0e0e0';
-  signUpBtnDiv.style.borderBottom = 'none';
-});
-
-// Event listener for Sign-Up form
-signUpForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const username = document.getElementById("username").value; 
-
-  try {
-    // Create user with Firebase Authentication
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-
-    // Save user data in the database
-    const userId = user.uid;
-    const userRef = ref(database, `users/${userId}`);
-    await set(userRef, {
-      username: username,
-      email: email
-    });
-    console.log("User data saved to database");
-
-    // Clear the form
-    signUpForm.reset();
-
-    // Show a welcome alert
-    alert("Welcome to FindAToilet!");
-
-    // Redirect to a new page
-    console.log("Redirecting to /addToilet.html");
-    window.location.href = "addToilet.html";
-  } catch (error) {
-    console.error("Sign-up error:", error.message);
-    alert("Error during sign-up: " + error.message);
+function showStatus(message) {
+  if (authStatus) {
+    authStatus.textContent = message;
   }
-});
+}
 
-// Event listener for Sign-In form
-signInForm.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const email = document.getElementById("signInEmail").value;
-  const password = document.getElementById("signInPassword").value;
+function showUsernameSetup(show) {
+  if (!usernameSetup) return;
+  usernameSetup.style.display = show ? "block" : "none";
+}
+
+function sanitizeUsername(value) {
+  return value.trim();
+}
+
+function validateUsername(username) {
+  if (username.length < 3 || username.length > 15) {
+    return "Username must be between 3 and 15 characters.";
+  }
+
+  if (!/^[A-Za-z0-9]+$/.test(username)) {
+    return "Username can only contain letters and numbers.";
+  }
+
+  return "";
+}
+
+async function isUsernameTaken(username, currentUid) {
+  const normalized = username.toLowerCase();
+  const rootRef = ref(database);
+  const usersSnapshot = await get(child(rootRef, "users"));
+
+  if (!usersSnapshot.exists()) {
+    return false;
+  }
+
+  const users = usersSnapshot.val();
+  for (const uid in users) {
+    if (uid === currentUid) {
+      continue;
+    }
+
+    const existingUsername = users[uid]?.username;
+    if (typeof existingUsername === "string" && existingUsername.toLowerCase() === normalized) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+async function handleGoogleAuth() {
+  try {
+    showStatus("Opening Google sign-in...");
+    const credential = await signInWithPopup(auth, provider);
+    const user = credential.user;
+    const userRef = ref(database, `users/${user.uid}`);
+    const snapshot = await get(userRef);
+
+    if (snapshot.exists() && snapshot.val().username) {
+      showStatus("Signed in. Redirecting...");
+      window.location.href = "/addToilet.html";
+      return;
+    }
+
+    pendingUser = user;
+    showUsernameSetup(true);
+
+    if (usernameInput && !usernameInput.value) {
+      const suggestedName = user.email ? user.email.split("@")[0] : "";
+      usernameInput.value = suggestedName.replace(/[^A-Za-z0-9]/g, "").slice(0, 15);
+    }
+
+    showStatus("Choose a username to complete signup.");
+  } catch (error) {
+    console.error("Google auth error:", error);
+    showStatus("");
+    alert("Google sign-in failed. Please try again.");
+  }
+}
+
+async function completeSignup() {
+  const user = pendingUser || auth.currentUser;
+  if (!user) {
+    alert("Please continue with Google first.");
+    return;
+  }
+
+  const username = sanitizeUsername(usernameInput ? usernameInput.value : "");
+  const usernameValidationError = validateUsername(username);
+  if (usernameValidationError) {
+    alert(usernameValidationError);
+    return;
+  }
 
   try {
-    // Sign in user with Firebase Authentication
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    console.log("User signed in:", userCredential.user.uid);
+    const taken = await isUsernameTaken(username, user.uid);
+    if (taken) {
+      alert("That username is already taken. Please choose another one.");
+      return;
+    }
 
-    // Clear the form
-    signInForm.reset();
+    const userRef = ref(database, `users/${user.uid}`);
+    await set(userRef, {
+      username,
+      email: user.email || ""
+    });
 
-    // Show a welcome alert
-    alert("Welcome back!");
-
-    // Redirect to a new page
-    console.log("Redirecting to /addToilet.html");
+    showStatus("Account created. Redirecting...");
     window.location.href = "/addToilet.html";
   } catch (error) {
-    console.error("Sign-in error:", error.message);
-    alert("Error during sign-in: " + error.message);
+    console.error("Signup completion error:", error);
+    showStatus("");
+    alert("Could not save your profile. Please try again.");
   }
-});
+}
+
+if (googleAuthBtn) {
+  googleAuthBtn.addEventListener("click", handleGoogleAuth);
+}
+
+if (completeSignupBtn) {
+  completeSignupBtn.addEventListener("click", completeSignup);
+}
+
+showUsernameSetup(false);

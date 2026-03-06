@@ -86,9 +86,11 @@ const findToiletLink = document.querySelector(".find-toilet-link");
 
             // Center the map on the user's location
             map.setView([lat, lng], 18);
-
-            L.marker([lat, lng], {icon: customIcon2}).addTo(map)
-              
+            if (userMarker) {
+              userMarker.setLatLng([lat, lng]);
+            } else {
+              userMarker = L.marker([lat, lng], { icon: customIcon2 }).addTo(map);
+            }
           },
           function (error) {
             alert("Unable to retrieve your location.");
