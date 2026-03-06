@@ -188,7 +188,7 @@ input[type="radio"] {
 }
 
 
-button {
+#formContainer button {
     margin: 20px 0 0;
     padding: 10px 20px;
     background-color: #F57C00;
@@ -202,7 +202,7 @@ button {
     max-width: 100%;
 }
 
-button:hover {
+#formContainer button:hover {
     background-color: #522900;
 }
 
@@ -348,7 +348,7 @@ textarea {
     overflow-y: auto !important; /* Enables vertical scrolling */
     overflow-x: hidden;
     position: fixed;
-    bottom: 0;
+    bottom: 40px;
     left: 0;
     right: 0;
     background: #ffffff;
@@ -413,7 +413,7 @@ textarea {
 
 /* When 'show' class is added, move the panel up */
 #infoPanel.show {
-    bottom: 0 !important;
+    bottom: 40px !important;
 }
 
 
@@ -631,7 +631,7 @@ i, .material-icons {
         margin: 0;
     }
 
-    button {
+    #formContainer button {
         width: 100%;
         align-self: stretch;
     }

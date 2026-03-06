@@ -99,7 +99,7 @@ header {
     overflow-y: auto !important; /* Enables vertical scrolling */
     overflow-x: hidden;
     position: fixed;
-    bottom: 0;
+    bottom: 40px;
     left: 0;
     right: 0;
     background: #ffffff;
@@ -164,7 +164,7 @@ header {
 
 /* When 'show' class is added, move the panel up */
 #infoPanel.show {
-    bottom: 0 !important;
+    bottom: 40px !important;
 }
 
 
