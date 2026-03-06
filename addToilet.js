@@ -440,6 +440,44 @@ markerCluster.addLayer(marker); // Add marker to the cluster group
   }
 }
 
+async function hasNearbyToilet(targetLat, targetLong, minDistanceMeters = 50) {
+  const rootRef = ref(database);
+
+  try {
+    const snapshot = await get(child(rootRef, "toilets"));
+    if (!snapshot.exists()) {
+      return false;
+    }
+
+    const toilets = snapshot.val();
+    for (const userId in toilets) {
+      const userToilets = toilets[userId];
+      for (const toiletId in userToilets) {
+        const toilet = userToilets[toiletId];
+        if (toilet.crossLat === undefined || toilet.crossLong === undefined) {
+          continue;
+        }
+
+        const existingLat = parseFloat(toilet.crossLat);
+        const existingLong = parseFloat(toilet.crossLong);
+        if (isNaN(existingLat) || isNaN(existingLong)) {
+          continue;
+        }
+
+        const distance = getDistance(targetLat, targetLong, existingLat, existingLong);
+        if (distance < minDistanceMeters) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  } catch (error) {
+    console.error("Error checking nearby toilets:", error);
+    return false;
+  }
+}
+
 // --- AUTHENTICATION & FORM HANDLING --- //
 
 // Monitor authentication state
@@ -601,6 +639,12 @@ document.addEventListener("DOMContentLoaded", function () {
       // Check if the user is too far from the toilet location
       if (distance >= 50) {
         alert("You are too far from the toilet you are trying to add. Please get closer.");
+        return;
+      }
+
+      const nearbyToiletExists = await hasNearbyToilet(crossLat, crossLong, 50);
+      if (nearbyToiletExists) {
+        alert("Opps! A toilet already exsist in this location");
         return;
       }
 
