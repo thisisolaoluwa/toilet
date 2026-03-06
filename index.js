@@ -19,7 +19,7 @@ const database = getDatabase(app);
 // Custom icon for toilet markers
 const customIcon = L.icon({
   iconUrl: "icon.png",
-  iconSize: [21, 31],
+  iconSize: [31, 21],
   iconAnchor: [25, 50],
   popupAnchor: [0, -50],
 });
