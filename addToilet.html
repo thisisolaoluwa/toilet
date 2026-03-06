@@ -84,10 +84,11 @@
                 <form id="toiletForm">
                     
 
-                    <label>1. click here to zoom to your location.</label>
+                    <label>1. Click here to zoom to your location.</label>
                     <button type="button" id="zoomToMyLocationBtn">Zoom to my location</button>
                     <label>2. Add the toilet name</label>
                     <input type="text" id="toiletNamePlaceholder" placeholder="Toilet name" class="input-text" required>
+                    <small id="toiletNameHint">It could be the name of the building, name of street or the closest bus stop.</small>
                   
                     <label>3. Who can use these toilets?</label>
                     <div class="question-group">
@@ -146,62 +147,62 @@
                               <thead>
                                 <tr>
                                   <th>Day</th>
+                                  <th>24 Hours</th>
                                   <th>Opening Time</th>
                                   <th>Closing Time</th>
                                   <th>Closed</th>
-                                  <th>24 Hours</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <!-- Loop for all days of the week -->
                                 <tr>
                                   <td>Monday</td>
+                                  <td><input type="checkbox" name="monday_24hours" class="fullDayCheckbox"></td>
                                   <td><select name="monday_open" class="time-select"></select></td>
                                   <td><select name="monday_close" class="time-select"></select></td>
                                   <td><input type="checkbox" name="monday_closed" class="closed-checkbox"></td>
-                                  <td><input type="checkbox" name="monday_24hours" class="fullDayCheckbox"></td>
                                 </tr>
                                 <tr>
                                   <td>Tuesday</td>
+                                  <td><input type="checkbox" name="tuesday_24hours" class="fullDayCheckbox"></td>
                                   <td><select name="tuesday_open" class="time-select"></select></td>
                                   <td><select name="tuesday_close" class="time-select"></select></td>
                                   <td><input type="checkbox" name="tuesday_closed" class="closed-checkbox"></td>
-                                  <td><input type="checkbox" name="tuesday_24hours" class="fullDayCheckbox"></td>
                                 </tr>
                                 <tr>
                                   <td>Wednesday</td>
+                                  <td><input type="checkbox" name="wednesday_24hours" class="fullDayCheckbox"></td>
                                   <td><select name="wednesday_open" class="time-select"></select></td>
                                   <td><select name="wednesday_close" class="time-select"></select></td>
                                   <td><input type="checkbox" name="wednesday_closed" class="closed-checkbox"></td>
-                                  <td><input type="checkbox" name="wednesday_24hours" class="fullDayCheckbox"></td>
                                 </tr>
                                 <tr>
                                   <td>Thursday</td>
+                                  <td><input type="checkbox" name="thursday_24hours" class="fullDayCheckbox"></td>
                                   <td><select name="thursday_open" class="time-select"></select></td>
                                   <td><select name="thursday_close" class="time-select"></select></td>
                                   <td><input type="checkbox" name="thursday_closed" class="closed-checkbox"></td>
-                                  <td><input type="checkbox" name="thursday_24hours" class="fullDayCheckbox"></td>
                                 </tr>
                                 <tr>
                                   <td>Friday</td>
+                                  <td><input type="checkbox" name="friday_24hours" class="fullDayCheckbox"></td>
                                   <td><select name="friday_open" class="time-select"></select></td>
                                   <td><select name="friday_close" class="time-select"></select></td>
                                   <td><input type="checkbox" name="friday_closed" class="closed-checkbox"></td>
-                                  <td><input type="checkbox" name="friday_24hours" class="fullDayCheckbox"></td>
                                 </tr>
                                 <tr>
                                   <td>Saturday</td>
+                                  <td><input type="checkbox" name="saturday_24hours" class="fullDayCheckbox"></td>
                                   <td><select name="saturday_open" class="time-select"></select></td>
                                   <td><select name="saturday_close" class="time-select"></select></td>
                                   <td><input type="checkbox" name="saturday_closed" class="closed-checkbox"></td>
-                                  <td><input type="checkbox" name="saturday_24hours" class="fullDayCheckbox"></td>
                                 </tr>
                                 <tr>
                                   <td>Sunday</td>
+                                  <td><input type="checkbox" name="sunday_24hours" class="fullDayCheckbox"></td>
                                   <td><select name="sunday_open" class="time-select"></select></td>
                                   <td><select name="sunday_close" class="time-select"></select></td>
                                   <td><input type="checkbox" name="sunday_closed" class="closed-checkbox"></td>
-                                  <td><input type="checkbox" name="sunday_24hours" class="fullDayCheckbox"></td>
                                 </tr>
                               </tbody>
                             </table>

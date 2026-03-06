@@ -36,6 +36,7 @@ const customIcon2 = L.icon({
 let map;
 let userMarker, userCircle;
 let userInteracted = false;
+let allToiletLocations = [];
 
 
 // Create the marker cluster group and apply the custom icon
@@ -55,9 +56,43 @@ let markerCluster = L.markerClusterGroup({
 
 
 
+
+function getDistanceMeters(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * (Math.PI / 180);
+  const dLng = (lng2 - lng1) * (Math.PI / 180);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c * 1000;
+}
+
+function findNearestToilet(userLat, userLng) {
+  if (!allToiletLocations.length) {
+    return null;
+  }
+
+  let nearest = allToiletLocations[0];
+  let shortest = getDistanceMeters(userLat, userLng, nearest.lat, nearest.lng);
+
+  for (let i = 1; i < allToiletLocations.length; i += 1) {
+    const candidate = allToiletLocations[i];
+    const distance = getDistanceMeters(userLat, userLng, candidate.lat, candidate.lng);
+    if (distance < shortest) {
+      nearest = candidate;
+      shortest = distance;
+    }
+  }
+
+  return nearest;
+}
 // Initialize the map
 document.addEventListener("DOMContentLoaded", function () {
-  map = L.map("map").setView([47.0679, 15.4417], 14);
+  map = L.map("map").setView([47.5162, 14.5501], 7);
 
   L.tileLayer.provider("MapTiler.Streets", {
     key: "Jjz68MUbUh6hPOf9bnWl",
@@ -84,12 +119,19 @@ const findToiletLink = document.querySelector(".find-toilet-link");
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
 
-            // Center the map on the user's location
-            map.setView([lat, lng], 18);
+            // Keep one user marker and fit map to include both user and closest toilet.
             if (userMarker) {
               userMarker.setLatLng([lat, lng]);
             } else {
               userMarker = L.marker([lat, lng], { icon: customIcon2 }).addTo(map);
+            }
+
+            const nearestToilet = findNearestToilet(lat, lng);
+            if (nearestToilet) {
+              const bounds = L.latLngBounds([[lat, lng], [nearestToilet.lat, nearestToilet.lng]]);
+              map.fitBounds(bounds, { padding: [60, 60], maxZoom: 16 });
+            } else {
+              map.setView([lat, lng], 16);
             }
           },
           function (error) {
@@ -139,6 +181,8 @@ async function fetchAllToiletLocations() {
           }
         }
       }
+
+      allToiletLocations = locations.map(({ lat, lng }) => ({ lat, lng }));
 
       locations.forEach((toilet) => {
         const { lat, lng, toiletName, username, ...details } = toilet;

@@ -91,7 +91,7 @@ async function handleGoogleAuth() {
 
     if (snapshot.exists() && snapshot.val().username) {
       const existingUsername = snapshot.val().username;
-      alert(`Welcome back "${existingUsername}"`);
+      alert(`Welcome back ${existingUsername}`);
       showStatus("Signed in. Redirecting...");
       window.location.href = "/addToilet.html";
       return;
